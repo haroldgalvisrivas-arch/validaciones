@@ -1,0 +1,239 @@
+/* Variables de color y configuración base */
+:root {
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    --card-bg: #ffffff;
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border-color: #cbd5e1;
+    --error-color: #ef4444;
+    --error-bg: #fef2f2;
+    --success-color: #10b981;
+    --success-bg: #ecfdf5;
+    --radius: 10px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--bg-gradient);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+    color: var(--text-main);
+}
+
+/* Tarjeta principal del formulario */
+#formulario {
+    background: var(--card-bg);
+    width: 100%;
+    max-width: 560px;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.25), 
+                0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    border-top: 6px solid var(--primary);
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Grupos de campos */
+.grupo {
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.grupo label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: var(--text-main);
+    transition: color 0.2s ease;
+}
+
+/* Inputs y Selects */
+.grupo input[type="text"],
+.grupo input[type="email"],
+.grupo input[type="password"],
+.grupo input[type="number"],
+.grupo input[type="tel"],
+.grupo select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius);
+    background-color: #f8fafc;
+    color: var(--text-main);
+    outline: none;
+    transition: all 0.25s ease;
+}
+
+/* Flecha personalizada para el select */
+.grupo select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.1em;
+    padding-right: 2.5rem;
+    cursor: pointer;
+}
+
+.grupo input:focus,
+.grupo select:focus {
+    background-color: #ffffff;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
+}
+
+/* Estados dinámicos controlados por tu JS (.error y .exito) */
+.grupo input.error,
+.grupo select.error {
+    border-color: var(--error-color);
+    background-color: var(--error-bg);
+    animation: shake 0.3s ease-in-out;
+}
+
+.grupo input.error:focus,
+.grupo select.error:focus {
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15);
+}
+
+.grupo input.exito,
+.grupo select.exito {
+    border-color: var(--success-color);
+    background-color: var(--success-bg);
+}
+
+.grupo input.exito:focus,
+.grupo select.exito:focus {
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15);
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Mensajes de validación (etiquetas <small>) */
+.grupo small {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--error-color);
+    min-height: 1.1rem;
+    margin-top: 0.35rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+/* Agrega un ícono de advertencia automáticamente cuando <small> tiene texto */
+.grupo small:not(:empty)::before {
+    content: "⚠";
+    font-size: 0.85rem;
+}
+
+/* Checkbox de términos y condiciones */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    user-select: none;
+    padding: 0.5rem 0;
+}
+
+.checkbox-container input[type="checkbox"] {
+    width: 1.15rem;
+    height: 1.15rem;
+    accent-color: var(--primary);
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.checkbox-container:hover {
+    color: var(--text-main);
+}
+
+/* Botón de envío */
+#btnRegistrar {
+    width: 100%;
+    padding: 0.9rem 1.5rem;
+    margin-top: 0.75rem;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--primary) 0%, #6366f1 100%);
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+    transition: all 0.25s ease;
+}
+
+#btnRegistrar:hover:not(:disabled) {
+    background: linear-gradient(135deg, var(--primary-hover) 0%, var(--primary) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.45);
+}
+
+#btnRegistrar:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+/* Estado deshabilitado que controla btnRegistrar.disabled en tu JS */
+#btnRegistrar:disabled {
+    background: #cbd5e1;
+    color: #94a3b8;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Mensaje final de confirmación */
+#mensajeFinal {
+    margin-top: 1.25rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
+}
+
+#mensajeFinal:not(:empty) {
+    padding: 0.85rem 1rem;
+    background-color: var(--success-bg);
+    border: 1px solid #a7f3d0;
+}
+
+/* Responsivo para pantallas pequeñas */
+@media (max-width: 480px) {
+    #formulario {
+        padding: 1.75rem 1.25rem;
+    }
+}
